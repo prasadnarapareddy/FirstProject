@@ -1,0 +1,59 @@
+<p>rigimdf works!</p>
+<div class="container">
+    <h1>User Rigistration Form</h1>
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <label>Name:</label> <input type="text" #nameRef class="form-control" formControlName="Name">
+
+            <div *ngIf="userForm.controls['Name'].hasError('required')" class="alert alert-danger">
+
+                Please Enter A Name
+            </div>
+            <div *ngIf="userForm.controls['Name'].hasError('minlength')" class="alert alert-danger">
+                Please Enter AtLeast 5 Charaters
+            </div>
+            <div *ngIf="userForm.controls['Name'].hasError('maxlength')" class="alert alert-danger">
+                Please Enter not Above 12 Charaters
+            </div>
+            <div *ngIf="userForm.controls['Name'].hasError('pattern')" class="alert alert-danger">
+                Please Enter Valid Data
+            </div>
+
+
+        </div>
+
+
+        <div class="form-group">
+            <label>Contact:</label>
+            <input type="text" required class="form-control" formControlName="Contact">
+        </div>
+
+        <div class="form-group">
+            <label>Email:</label>
+            <input type="text" required class="form-control" formControlName="Email">
+        </div>
+        <div formGroupName="Address">
+            <div class="form-group">
+                <label>Street:</label>
+                <input type="text" class="form-control" formControlName="Street">
+            </div>
+            <div class="form-group">
+                <label>City:</label>
+                <input type="text" required class="form-control" formControlName="City">
+            </div>
+            <div class="form-group">
+                <label>PostalCode:</label>
+                <input type="number" class="form-control" formControlName="Postalcode">
+                <div *ngIf="userForm.controls['Address'].controls['Postalcode'].hasError('pattern')"
+                    class="alert alert-danger">
+                    please enter 5 digit postal code
+
+                </div>
+            </div>
+        </div>
+
+        <button [disabled]="!userForm.valid" type="submit" class="btn btn-success">submit</button>
+
+    </form>
+
+</div>
